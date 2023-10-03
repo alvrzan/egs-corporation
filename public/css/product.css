@@ -1,0 +1,71 @@
+/* product.css */
+/* Tambahkan background pada bagian teks */
+.product-details {
+    background-color: #163011;
+    height: 100%;
+    width: auto;
+    padding: 25px;
+}
+
+/* Sudut tumpul di sebelah kiri (indeks produk genap) */
+.col-md-6:nth-child(even) .product-details {
+    border-radius: 30px;
+}
+
+/* Sudut tumpul di sebelah kanan (indeks produk ganjil) */
+.col-md-6:nth-child(odd) .product-details {
+    border-radius: 30px;
+
+}
+/* Gaya teks dalam bagian teks */
+.product-details h1,
+.product-details h2,
+.product-details p {
+    color: whitesmoke;
+    margin: 0;
+}
+
+/* Gaya untuk tombol dalam bagian teks */
+.product-details .button-container {
+    margin-top: 30px; /* Mendorong tombol ke bagian bawah */
+}
+/* Customize carousel container */
+.carousel {
+    position: relative;
+}
+
+/* Center carousel control buttons */
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    font-size: 24px;
+    z-index: 10;
+}
+
+/* Customize carousel control icons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    color: #fff;
+}
+
+/* Set color on hover */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Set max width and max height for carousel images */
+.carousel-inner img {
+    max-width: 100%;
+    max-height: 400px; /* You can adjust this value as needed */
+    margin: 0 auto; /* Center the image horizontally */
+    display: block;
+    border-radius: 30px; /* Add border radius */
+    object-fit: cover; /* Menyesuaikan gambar tanpa merusak aspek ratio */
+}

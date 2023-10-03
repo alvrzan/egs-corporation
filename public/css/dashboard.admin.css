@@ -1,0 +1,23 @@
+/* public/css/dashboard.admin.css */
+
+/* Gaya untuk tabel */
+.custom-table td:first-child {
+    width: 30%;
+    border: none;
+}
+
+/* Gaya untuk teks judul */
+h4 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Gaya untuk latar belakang card */
+.card {
+    background-color: #f8f9fa;
+}
+
+.card-header {
+    background-color: rgb(106, 255, 0);
+}

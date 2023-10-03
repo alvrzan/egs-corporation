@@ -1,0 +1,128 @@
+.navbar {
+    background-image: linear-gradient(to right, #1D2F1A 30%, #4A710C 80%);
+    background-color: #1d2f1a;
+    padding: 18px;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.nav-item {
+    margin-right: 15px;
+}
+.cart-count {
+    transition: opacity 0.5s, transform 0.3s, right 0.3s; /* Tambahkan transition untuk top dan right */
+    transform: scale(0.8);
+    position: absolute;
+    top: -17px; /* Sesuaikan dengan posisi angka */
+    right: -17px; /* Sesuaikan dengan posisi angka */
+    background-color: #c90000; /* Warna latar belakang angka */
+    color: #ffffff; /* Warna teks angka */
+    font-size: 22px; /* Ukuran font angka */
+    width: 40px; /* Lebar bubble angka */
+    height: 40px; /* Tinggi bubble angka */
+    border-radius: 100px; /* Agar bubble menjadi lingkaran */
+    text-align: center;
+    line-height: 40px; /* Menyusun teks ke tengah vertical */
+    z-index: 1; /* Agar bubble tumpang tindih dengan ikon keranjang */
+}
+
+.cart-link:hover .cart-count {
+    opacity: 0;
+    transform: scale(1);
+    right: -40px; /* Sesuaikan dengan posisi angka saat dihover */
+}
+.cart-link {
+    position: relative;
+    display: inline-block;
+}
+
+.cart {
+    opacity: 1;
+    width: 60px;
+    height: 60px;
+    vertical-align: middle;
+    transition: transform 0.7s, opacity 1s;
+}
+.logo {
+    opacity: 1;
+    width: 80px;
+    height: auto;
+    vertical-align: middle;
+    transition: transform 0.7s, opacity 1s;
+}
+
+.cart-link:hover .cart {
+    transform: translateX(80px);
+    opacity: 0;
+    transition: 1s;
+}
+
+.cart-text {
+    color: #ccc;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s, left 0.3s;
+    padding-left: 5px;
+}
+
+.cart-link:hover .cart-text {
+    opacity: 1;
+    left: -10px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Tambahkan gaya untuk elemen dengan kelas "active" */
+.nav-link.active {
+    font-weight: bold;
+    /* Atur gaya tebal sesuai kebutuhan */
+    /* Misalnya, Anda dapat mengatur warna teks atau latar belakang yang berbeda */
+}
+
+.nav-link:hover {
+    color: #ccc;
+}
+
+.purchase {
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Perbaikan untuk animasi elemen account */
+.account-link:hover .account {
+    opacity: 0.9;
+    transform: scale(1.4);
+}
+
+.account-link {
+    position: relative;
+    display: inline-block;
+}
+
+.account {
+    width: 70px;
+    height: 70px;
+    vertical-align: middle;
+    object-fit: cover;
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: 1;
+    transform: scale(1);
+}

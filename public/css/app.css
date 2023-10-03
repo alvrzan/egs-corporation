@@ -1,0 +1,99 @@
+/* Global styles */
+body {
+    /* background: url("https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG9mZmljZXxlbnwwfHwwfHx8Mg%3D%3D&auto=format&fit=crop&w=500&q=60")fixed; */
+    background: url("/images/bg.webp");
+    background-size: cover;
+    color: #ffffff;
+    /* color: #393737; */
+    font-family: "Athiti", sans-serif;
+    font-size: larger;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    object-fit: cover;
+}
+
+body::before {
+    content: "";
+    background: url("/images/bg.webp");
+    background-size: cover;
+    filter: blur(5px); /* Mengatur efek buram */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Mengatur lapisan di bawah konten */
+    opacity: 1; /* Mengatur tingkat keburaman gambar latar belakang */
+}
+
+.container-fluid {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Main Content */
+.content {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/* Footer */
+.footer {
+    background-color: #393737;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+.footer h3 {
+    font-size: large;
+}
+
+h5 {
+    color: rgb(106, 255, 0);
+    font-weight: bolder;
+    /* color: rgb(86, 135, 38); */
+}
+
+/* Media Queries */
+@media (max-width: 767px) {
+    .section-image {
+        max-width: 100%;
+        width: 400px;
+        height: auto;
+        border-radius: 58px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .logo-img {
+        max-width: 100%;
+        width: 80px;
+        height: auto;
+    }
+
+    .navbar-brand {
+        font-size: 20px;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    .nav-item {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .purchase {
+        margin-top: 10px;
+    }
+
+    .content {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
