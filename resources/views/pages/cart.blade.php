@@ -90,6 +90,39 @@
             errorMessage.style.display = 'none';
         }, 1500);
     }
+
+    function updateCartItemQuantity(cartItemId, newQuantity) {
+        // Menyusun data yang akan dikirim dalam permintaan AJAX
+        var data = {
+            cartItemId: cartItemId,
+            newQuantity: newQuantity
+        };
+
+        // Mengirim permintaan AJAX untuk memperbarui jumlah produk dalam keranjang belanja
+        $.ajax({
+            type: "PATCH",
+            url: "/api/cart/update-quantity/" + cartItemId, // Sesuaikan dengan rute API yang sesuai
+            data: data,
+            success: function (response) {
+                // Perbarui tampilan jika berhasil
+                if (response.success) {
+                    // Perbarui total harga
+                    var total = response.total;
+                    $("#total-price").text(total);
+
+                    // Tampilkan pesan sukses
+                    showSuccessMessage("Quantity updated successfully.");
+                } else {
+                    // Tampilkan pesan error jika ada masalah
+                    showErrorMessage("Failed to update quantity.");
+                }
+            },
+            error: function (error) {
+                // Tampilkan pesan error jika terjadi kesalahan dalam permintaan
+                showErrorMessage("An error occurred while updating quantity.");
+            }
+        });
+    }
 </script>
 
 @endsection

@@ -5,8 +5,10 @@
 }
 
 .card-header {
-    background-color: #355678;
-    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000;
     font-weight: bold;
     border-bottom: 1px solid #ddd;
     padding: 15px;
@@ -27,6 +29,29 @@
 
 .form-group {
     margin-bottom: 20px;
+    position: relative;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(0, 0, 0, 0.35);
+}
+
+/* Sesuaikan jarak kanan input agar ikon tidak bertabrakan dengan placeholder */
+.input-icon input {
+    padding-left: 40px; /* Sesuaikan jarak kanan sesuai kebutuhan Anda */
+}
+
+/* Tambahkan transisi agar perubahan pada input lebih halus */
+.input-icon input {
+    transition: border-color 0.3s, padding-left 0.3s;
 }
 
 .form-control {
@@ -48,7 +73,7 @@
 }
 
 .btn-primary {
-    background-color: #4A710C;
+    background-color: #4a710c;
     border: none;
     color: #fff;
     padding: 10px 20px;

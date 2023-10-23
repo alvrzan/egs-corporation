@@ -24,7 +24,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header text-white">ADMIN PAGE</div>
+                <div class="card-header text-white">User Information</div>
 
                 <div class="card-body">
                     <h4 class="mb-4">Your Biodata:</h4>
