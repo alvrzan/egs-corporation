@@ -22,12 +22,6 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Definisikan relasi dengan tabel item transaksi jika diperlukan
-    public function transactionItems()
-    {
-        return $this->hasMany(TransactionItem::class);
-    }
-
     public function products()
     {
         return $this->belongsToMany(Product::class, 'transaction_product', 'transaction_id', 'product_id')
