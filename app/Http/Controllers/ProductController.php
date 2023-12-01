@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $products = Product::all();
         // return response()->json(['products' => $products]);
-        return view('admin/products', compact('products'));
+        return view('admin/view/products', compact('products'));
     }
 
     public function show($id)

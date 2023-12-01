@@ -4,10 +4,10 @@ use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\NbController;
 use App\Http\Controllers\PredictController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\DataController;
 use App\Models\User;
 
@@ -127,8 +127,9 @@ Route::group(['prefix' => 'data'], function () {
         return view('admin/panel');
     })->name('data');
 
-    Route::get('/admin/products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/admin/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('admin/transactions', [TransactionController::class, 'index'])->name('trans.index');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 
     Route::apiResource('products', ProductController::class);

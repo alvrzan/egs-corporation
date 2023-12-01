@@ -88,6 +88,7 @@
             <ul>
                 <li><a href="{{ route('products.index') }}">Products</a></li>
                 <li><a href="{{ route('users.index') }}">Users</a></li>
+                <li><a href="{{ route('trans.index') }}">Transactions</a></li>
                 <li><a href="{{ route('home') }}">Home</a></li>
             </ul>
         </div>
