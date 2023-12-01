@@ -29,9 +29,9 @@
                 <td>{{ $cartItem->product->name }}</td>
                 <td>Rp {{ number_format($cartItem->product->price, 0, ',', '.') }}</td>
                 <td>
-                    <input type="number" class="form-control" value="{{ $cartItem->quantity }}" onchange="updateCartItemQuantity({{ $cartItem->id }}, this.value)">
+                    <input type="number" class="form-control" value="{{ $cartItem->quantity }}" oninput="updateCartItemQuantity({{ $cartItem->id }}, this.value)">
                 </td>
-                <td>Rp {{ number_format($cartItem->quantity * $cartItem->product->price, 0, ',', '.') }}</td>
+                <td class="total-price" data-product-price="{{ $cartItem->product->price * $cartItem->quantity }}">Rp {{ number_format($cartItem->quantity * $cartItem->product->price, 0, ',', '.') }}</td>
                 <td>
                     <form action="{{ route('delete-cart', ['id' => $cartItem->id]) }}" method="POST">
                         @csrf
@@ -49,14 +49,13 @@
             @csrf <!-- Tambahkan CSRF token untuk keamanan -->
             <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
         </form>
-            </div>
+    </div>
     @else
     <p>Your shopping cart is empty.</p>
     @endif
 </div>
 
 <script>
-    // Panggil fungsi JavaScript untuk menampilkan pesan sesuai dengan session
     document.addEventListener('DOMContentLoaded', function () {
         @if (Session::has('success'))
         showSuccessMessage('<strong>{{ Session::get('success') }}</strong>');
@@ -67,61 +66,76 @@
         @endif
     });
 
-    // Fungsi untuk menampilkan pesan sukses dengan animasi fading
     function showSuccessMessage(message) {
         var successMessage = document.getElementById('success-message');
         successMessage.innerHTML = message;
         successMessage.style.display = 'block';
 
-        // Sembunyikan pesan sukses setelah 1 detik
         setTimeout(function () {
             successMessage.style.display = 'none';
         }, 1500);
     }
 
-    // Fungsi untuk menampilkan pesan error dengan animasi fading
     function showErrorMessage(message) {
         var errorMessage = document.getElementById('error-message');
         errorMessage.innerHTML = message;
         errorMessage.style.display = 'block';
 
-        // Sembunyikan pesan error setelah 1 detik
         setTimeout(function () {
             errorMessage.style.display = 'none';
         }, 1500);
     }
 
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // Function to update the quantity of a cart item via AJAX
     function updateCartItemQuantity(cartItemId, newQuantity) {
-        // Menyusun data yang akan dikirim dalam permintaan AJAX
-        var data = {
-            cartItemId: cartItemId,
-            newQuantity: newQuantity
-        };
+    var data = {
+        quantity: newQuantity,
+        _token: "{{ csrf_token() }}"
+    };
 
-        // Mengirim permintaan AJAX untuk memperbarui jumlah produk dalam keranjang belanja
-        $.ajax({
-            type: "PATCH",
-            url: "/api/cart/update-quantity/" + cartItemId, // Sesuaikan dengan rute API yang sesuai
-            data: data,
-            success: function (response) {
-                // Perbarui tampilan jika berhasil
-                if (response.success) {
-                    // Perbarui total harga
-                    var total = response.total;
-                    $("#total-price").text(total);
+    $.ajax({
+        type: "PATCH",
+        url: "/cart/update-quantity/" + cartItemId,
+        data: data,
+        success: function (response) {
+            console.log(response.message);
 
-                    // Tampilkan pesan sukses
-                    showSuccessMessage("Quantity updated successfully.");
-                } else {
-                    // Tampilkan pesan error jika ada masalah
-                    showErrorMessage("Failed to update quantity.");
-                }
-            },
-            error: function (error) {
-                // Tampilkan pesan error jika terjadi kesalahan dalam permintaan
-                showErrorMessage("An error occurred while updating quantity.");
+            if (response.updatedCartItem) {
+                var cartItem = response.updatedCartItem;
+
+                // Update kuantitas
+                $("#cart-item-" + cartItem.id + " .form-control").val(cartItem.quantity);
+
+                // Update total harga untuk item
+                var totalPrice = cartItem.quantity * cartItem.product.price;
+                $("#cart-item-" + cartItem.id + " .total-price").text("Rp " + numberWithCommas(totalPrice));
+
+                // Update the data-product-price attribute with the new total price
+                $("#cart-item-" + cartItem.id + " .total-price").data("product-price", totalPrice);
+
+                // Recalculate total price after the update is successful
+                recalculateTotalPrice();
             }
+            updateCartCount();
+        },
+        error: function (error) {
+            console.log("Error updating quantity: ", error.responseJSON.message);
+            showErrorMessage("An error occurred while updating quantity.");
+        }
+    });
+}
+
+    function recalculateTotalPrice() {
+        var total = 0;
+        $(".total-price").each(function () {
+            total += parseFloat($(this).data("product-price"));
         });
+
+        $("#total-price").text(numberWithCommas(total));
     }
 </script>
 

@@ -93,7 +93,10 @@ class CartController extends Controller
             $cartItem->quantity = $request->quantity;
             $cartItem->save();
 
-            return response()->json(['message' => 'Kuantitas berhasil diperbarui.']);
+            // Update total harga produk pada baris yang diubah
+            $totalPrice = $cartItem->quantity * $cartItem->product->price;
+
+            return response()->json(['message' => 'Kuantitas berhasil diperbarui.', 'totalPrice' => $totalPrice, 'updatedCartItem' => $cartItem]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Gagal memperbarui kuantitas.'], 500);
         }
