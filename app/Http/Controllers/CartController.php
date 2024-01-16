@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -48,11 +49,12 @@ class CartController extends Controller
         // Menambahkan pesan jika keranjang belanja kosong
         $emptyCartMessage = $cartItems->isEmpty() ? 'Produk belum dipilih.' : '';
 
+        $images = Image::all();
         $productsWithImages = Product::with('images')->whereIn('id', $cartItems->pluck('product_id'))->get();
 
 
         // Mengembalikan view dengan data yang diperlukan
-        return view('pages.cart', compact('cartItems', 'totalPrice', 'productsWithImages', 'emptyCartMessage'));
+        return view('pages.cart', compact('cartItems', 'totalPrice', 'productsWithImages', 'emptyCartMessage', 'images'));
     }
 
     public function addToCart(Request $request, $productId)

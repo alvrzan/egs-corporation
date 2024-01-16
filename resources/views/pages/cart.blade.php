@@ -13,12 +13,18 @@
     <div class="row">
         <h1>Shopping Cart</h1>
         <div class="col">
-            @foreach($productsWithImages as $image)
-            <table>
-                <tr><img class="image-cart img-thumbnail" src="{{$image->image_path}}" alt="{{ $image->name }}" width="100"></tr>
-                src {{$image->image_path}}
-                {{-- <tr><img src="https://th.bing.com/th/id/OIP.C4W1xLQkf5iKW-dhLaTejgHaE9?w=255&h=180&c=7&r=0&o=5&dpr=1.4&pid=1.7"></tr> --}}
-            </table>
+            @foreach($cartItems as $cartItem)
+                <table>
+                    <tr>
+                        <td>
+                            @if($cartItem->product->images->isNotEmpty())
+                                <img class="image-cart img-thumbnail" src="{{ $cartItem->product->images->first()->image_path }}" alt="{{ $cartItem->product->name }}" width="120">
+                            @else
+                                <span>No image available</span>
+                            @endif
+                        </td>
+                    </tr>
+                </table>
             @endforeach
         </div>
         <div class="col img-thumbnail">
