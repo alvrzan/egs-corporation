@@ -3,22 +3,24 @@
 .container-cart {
     margin-top: 30px;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.74);
+    background-color: #1d2f1ac0;
     border-radius: 10px;
-    box-shadow: 0 0 30px rgb(106, 150, 4);
+    box-shadow: 0 0 30px #091007;
 }
 
 h1 {
-    font-size: 28px;
+    font-weight: bold;
+    font-size: 38px;
     margin-bottom: 20px;
     text-align: center;
-    color: #333; /* Ubah warna teks sesuai kebutuhan */
+    color: #ffffff; /* Ubah warna teks sesuai kebutuhan */
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    background-color: #e2e6ea;
 }
 
 .table th,
@@ -31,7 +33,7 @@ h1 {
     background-color: #f8f9fa;
 }
 
-.table tbody tr:nth-child(even) {
+.table tbody tr {
     background-color: #f2f2f2;
 }
 
@@ -44,7 +46,7 @@ h1 {
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #7fba21;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -55,7 +57,7 @@ h1 {
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #667b43a4;
 }
 
 h2 {
@@ -66,5 +68,8 @@ h2 {
     color: #333; /* Ubah warna teks sesuai kebutuhan */
 }
 
-
-
+.image-cart {
+    padding: 10px;
+    margin-top: 40px;
+    /* margin: 20px 15px; */
+}

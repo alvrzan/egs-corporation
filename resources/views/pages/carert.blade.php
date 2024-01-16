@@ -9,54 +9,40 @@
 <div id="success-message" class="alert alert-success" style="display: none; font-weight: bold;"></div>
 <div id="error-message" class="alert alert-danger" style="display: none; font-weight: bold;"></div>
 
-<div class="container container-cart">
-    <div class="row">
-        <h1>Shopping Cart</h1>
-        <div class="col">
-            @foreach($productsWithImages as $image)
-            <table>
-                <tr><img class="image-cart img-thumbnail" src="{{$image->image_path}}" alt="{{ $image->name }}" width="100"></tr>
-                src {{$image->image_path}}
-                {{-- <tr><img src="https://th.bing.com/th/id/OIP.C4W1xLQkf5iKW-dhLaTejgHaE9?w=255&h=180&c=7&r=0&o=5&dpr=1.4&pid=1.7"></tr> --}}
-            </table>
+<div class="container-cart">
+    <h1>Shopping Cart</h1>
+    @if ($cartItems->count() > 0)
+    <table class="table" id="cart-table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th> <!-- Tambah kolom aksi -->
+            </tr>
+        </thead>
+        <tbody>
+            {{-- Looping untuk menampilkan produk yang ada di shopping-cart --}}
+            @foreach($cartItems as $cartItem)
+            <tr id="cart-item-{{ $cartItem->id }}">
+                <td>{{ $cartItem->product->name }}</td>
+                <td>Rp {{ number_format($cartItem->product->price, 0, ',', '.') }}</td>
+                <td>
+                    <input type="number" class="form-control" value="{{ $cartItem->quantity }}" oninput="updateCartItemQuantity({{ $cartItem->id }}, this.value)">
+                </td>
+                <td class="total-price" data-product-price="{{ $cartItem->product->price * $cartItem->quantity }}">Rp {{ number_format($cartItem->quantity * $cartItem->product->price, 0, ',', '.') }}</td>
+                <td>
+                    <form action="{{ route('delete-cart', ['id' => $cartItem->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
             @endforeach
-        </div>
-        <div class="col img-thumbnail">
-            <table>
-                @if ($cartItems->count() > 0)
-                <table class="table" id="cart-table">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Action</th> <!-- Tambah kolom aksi -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- Looping untuk menampilkan produk yang ada di shopping-cart --}}
-                        @foreach($cartItems as $cartItem)
-                        <tr id="cart-item-{{ $cartItem->id }}">
-                            <td>{{ $cartItem->product->name }}</td>
-                            <td>Rp {{ number_format($cartItem->product->price, 0, ',', '.') }}</td>
-                            <td>
-                                <input type="number" class="form-control" value="{{ $cartItem->quantity }}" oninput="updateCartItemQuantity({{ $cartItem->id }}, this.value)">
-                            </td>
-                            <td class="total-price" data-product-price="{{ $cartItem->product->price * $cartItem->quantity }}">Rp {{ number_format($cartItem->quantity * $cartItem->product->price, 0, ',', '.') }}</td>
-                            <td>
-                                <form action="{{ route('delete-cart', ['id' => $cartItem->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Remove</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-        </div>
-    </div>
+        </tbody>
+    </table>
     <div class="text-center">
         <h2>Total Price: Rp <span id="total-price">{{ number_format($totalPrice, 0, ',', '.') }}</span></h2>
         <form action="{{ route('create-transaction') }}" method="POST">

@@ -45,6 +45,10 @@ Route::get('/cart/count', [CartController::class, 'getCartItemCount'])->name('ca
 Route::post('/login', [AuthController::class, 'login']);
 
 
+Route::get('/1', function () {
+    return view('pages/test');
+})->name('home');
+
 Route::get('/', function () {
     return view('pages/home');
 })->name('home');

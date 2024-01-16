@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+    public function show()
+    {
+        $product = Product::with('images');
+
+        if (!$product) {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
+
+        return view('pages.product_show', compact('product'));
+    }
     public function index()
     {
         // Pastikan pengguna sudah login
@@ -38,8 +48,11 @@ class CartController extends Controller
         // Menambahkan pesan jika keranjang belanja kosong
         $emptyCartMessage = $cartItems->isEmpty() ? 'Produk belum dipilih.' : '';
 
+        $productsWithImages = Product::with('images')->whereIn('id', $cartItems->pluck('product_id'))->get();
+
+
         // Mengembalikan view dengan data yang diperlukan
-        return view('pages.cart', compact('cartItems', 'totalPrice', 'emptyCartMessage'));
+        return view('pages.cart', compact('cartItems', 'totalPrice', 'productsWithImages', 'emptyCartMessage'));
     }
 
     public function addToCart(Request $request, $productId)

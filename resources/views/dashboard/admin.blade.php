@@ -74,8 +74,11 @@
 @section('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
     // Function to toggle between text and input fields
     function toggleEditField(field) {
+        console.log("djfhdjh")
+
         const span = document.getElementById(field);
         const input = document.getElementById(`${field}-input`);
         span.style.display = "none";
