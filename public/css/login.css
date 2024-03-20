@@ -147,7 +147,7 @@
 /* Gaya untuk efek transisi pada tombol Google */
 .btn-google img {
     margin-right: 5px; /* Sedikit margin untuk ikon Google */
-    transition: transform 0.3s ease-in-out; /* Animasi transformasi */
+    transition: transform 1s ease-in-out; /* Animasi transformasi */
     z-index: 2; /* Z-index untuk gambar ikon Google */
 }
 
